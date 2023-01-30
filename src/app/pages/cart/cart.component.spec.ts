@@ -35,6 +35,7 @@ describe('Cart component', () => {
 
     let component: CartComponent;
     let fixture: ComponentFixture<CartComponent>
+    let service: BookService
 
     beforeEach( () => {
         TestBed.configureTestingModule({
@@ -58,6 +59,9 @@ describe('Cart component', () => {
         fixture = TestBed.createComponent(CartComponent)
         component = fixture.componentInstance
         fixture.detectChanges()
+        
+        //private service
+        service = fixture.debugElement.injector.get(BookService)
     })
 
     it('should create CartComponent', () => {
@@ -70,6 +74,51 @@ describe('Cart component', () => {
        expect(totalPrice).toBeGreaterThan(0)
     //    expect(totalPrice).not.toBe(0)
     //    expect(totalPrice).not.toBeNull()
+    })
+
+
+    it('onInputNumberChange increments correctly', () => {
+        const action = 'plus'
+        const book: Book = {
+            name: '',
+            author: '',
+            isbn: '',
+            price: 15,
+            amount: 2
+        }
+
+        // const service = (component as any)._bookService
+        // const service2 = component['_bookService']
+        // const service2 = TestBed.get(BookService) - older version
+        
+        const spy = jest.spyOn(service, 'updateAmountBook').mockImplementation( () => null)
+        const spy2 = jest.spyOn(component, 'getTotalPrice').mockImplementation( () => null)
+        // prove that the method is really incrementing the amount
+        expect(book.amount).toBe(2)
+        component.onInputNumberChange(action, book)
+        expect(book.amount).toBe(3)
+        expect(spy).toHaveBeenCalled()
+        expect(spy2).toHaveBeenCalled()
+
+    })
+    it('onInputNumberChange decrements correctly', () => {
+        const action = 'minus'
+        const book: Book = {
+            name: '',
+            author: '',
+            isbn: '',
+            price: 15,
+            amount: 2
+        }
+
+        const spy = jest.spyOn(service, 'updateAmountBook').mockImplementation( () => null)
+        const spy2 = jest.spyOn(component, 'getTotalPrice').mockImplementation( () => null)
+        expect(book.amount).toBe(2)
+        component.onInputNumberChange(action, book)
+        expect(book.amount).toBe(1)
+        expect(spy).toHaveBeenCalled()
+        expect(spy2).toHaveBeenCalled()
+
     })
 
 })
