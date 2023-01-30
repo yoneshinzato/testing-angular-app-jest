@@ -14,19 +14,19 @@ describe('Cart component', () => {
     beforeEach( () => {
         TestBed.configureTestingModule({
             imports: [
-                HttpClientTestingModule
+                HttpClientTestingModule,
             ], 
             declarations: [
                 CartComponent
             ],
             providers: [
-                BookService
+                BookService,
             ],
             schemas: [
                 CUSTOM_ELEMENTS_SCHEMA,
                 NO_ERRORS_SCHEMA
             ]
-        })
+        }).compileComponents()
     })
 
     beforeEach( () => {
