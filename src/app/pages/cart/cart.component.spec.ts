@@ -98,7 +98,7 @@ describe('Cart component', () => {
 
         // const service = (component as any)._bookService
         // const service2 = component['_bookService']
-        // const service2 = TestBed.get(BookService) - older version
+        // const service2 = TestBed.get(BookService) - older version Angular 8-
         
         const spy = jest.spyOn(service, 'updateAmountBook').mockImplementation( () => null)
         const spy2 = jest.spyOn(component, 'getTotalPrice').mockImplementation( () => null)
