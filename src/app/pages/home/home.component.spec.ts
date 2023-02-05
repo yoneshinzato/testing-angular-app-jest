@@ -5,6 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core"
 import { BookService } from "../../services/book.service";
 import { of } from "rxjs";
 import { Book } from "src/app/models/book.model";
+import { fn } from "@angular/compiler/src/output/output_ast";
 
 const listBook: Book[] = [
     {
@@ -30,6 +31,10 @@ const listBook: Book[] = [
     },
 ]
 
+const bookServiceMock = {
+    getBooks: () => of(listBook)
+}
+
 describe('Home component', () => {
     let component: HomeComponent
     let fixture: ComponentFixture<HomeComponent>
@@ -43,7 +48,11 @@ describe('Home component', () => {
                 HomeComponent
             ],
             providers: [
-                BookService
+                // BookService - you can call it here and use the jest.spyOn method
+                {
+                    provide: BookService,
+                    useValue: bookServiceMock
+                }
             ],
             schemas: [
                 CUSTOM_ELEMENTS_SCHEMA,
@@ -69,9 +78,10 @@ describe('Home component', () => {
         // const bookService = TestBed.get(BookService)
         // Angular 9+
         const bookService = fixture.debugElement.injector.get(BookService)
-        const spy1 = jest.spyOn(bookService, 'getBooks').mockReturnValueOnce( of(listBook) )
+        // const spy1 = jest.spyOn(bookService, 'getBooks').mockReturnValueOnce( of(listBook) )
         component.getBooks()
-        expect(spy1).toHaveBeenCalledTimes(1)
+        // expect(spy1).toHaveBeenCalledTimes(1)
+        
         expect(component.listBook.length).toBe(3)
         expect(component.listBook).toEqual(listBook)
     })
