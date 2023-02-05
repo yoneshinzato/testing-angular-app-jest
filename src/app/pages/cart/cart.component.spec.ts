@@ -55,6 +55,7 @@ describe('Cart component', () => {
         }).compileComponents()
     })
 
+
     beforeEach( () => {
         fixture = TestBed.createComponent(CartComponent)
         component = fixture.componentInstance
@@ -62,6 +63,14 @@ describe('Cart component', () => {
         
         //private service
         service = fixture.debugElement.injector.get(BookService)
+
+        //testing method inside ngOnInit of the Cart Component
+        jest.spyOn(service, 'getBooksFromCart').mockImplementation( () => listBook)
+    })
+
+    afterEach( () => {
+        fixture.destroy()
+        jest.resetAllMocks()
     })
 
     it('should create CartComponent', () => {
