@@ -118,7 +118,25 @@ describe('Cart component', () => {
         expect(book.amount).toBe(1)
         expect(spy).toHaveBeenCalled()
         expect(spy2).toHaveBeenCalled()
+    })
 
+    it('onClearBooks works correctly', () => {
+        const spy1 = jest.spyOn(service, 'removeBooksFromCart').mockImplementation( () => null)
+        //testing a private method from a component
+        const spy2 = jest.spyOn(component as any, "_clearListCartBook");
+        component.listCartBook = listBook
+        component.onClearBooks()
+        expect(component.listCartBook.length).toBe(0)
+        expect(spy1).toHaveBeenCalledTimes(1)
+        expect(spy2).toHaveBeenCalledTimes(1)
+    })
+
+    it("_clearListBook works correctly", () => {
+        const spy1 = jest.spyOn(service, 'removeBooksFromCart').mockImplementation( () => null)
+        component.listCartBook = listBook
+        component['_clearListCartBook']()
+        expect(component.listCartBook.length).toBe(0)
+        expect(spy1).toHaveBeenCalledTimes(1)
     })
 
 })
