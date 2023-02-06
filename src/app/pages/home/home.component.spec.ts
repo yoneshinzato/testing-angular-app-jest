@@ -1,7 +1,7 @@
 import { HomeComponent } from "./home.component"
 import { ComponentFixture, TestBed, } from "@angular/core/testing"
 import { HttpClientTestingModule } from "@angular/common/http/testing"
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core"
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Pipe, PipeTransform } from "@angular/core"
 import { BookService } from "../../services/book.service";
 import { of } from "rxjs";
 import { Book } from "src/app/models/book.model";
@@ -35,6 +35,13 @@ const bookServiceMock = {
     getBooks: () => of(listBook)
 }
 
+@Pipe({name: 'reduceText'})
+class ReducePipeMock implements PipeTransform {
+    transform(): string {
+        return ''
+    }
+}
+
 describe('Home component', () => {
     let component: HomeComponent
     let fixture: ComponentFixture<HomeComponent>
@@ -45,7 +52,8 @@ describe('Home component', () => {
                 HttpClientTestingModule,
             ], 
             declarations: [
-                HomeComponent
+                HomeComponent,
+                ReducePipeMock
             ],
             providers: [
                 // BookService - you can call it here and use the jest.spyOn method
