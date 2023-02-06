@@ -85,8 +85,10 @@ describe('Home component', () => {
         expect(component.listBook.length).toBe(3)
         expect(component.listBook).toEqual(listBook)
     })
-
-
+    // xit() - ignore this specific test suite
+    // xdescribe() - works the same way
+    // fit() ou it.only() - test only this specific suite
+    // fdescribe() describe.only() works similarly
 }
 
 })
