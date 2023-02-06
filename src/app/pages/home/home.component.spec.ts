@@ -67,6 +67,15 @@ describe('Home component', () => {
         component = fixture.componentInstance
         fixture.detectChanges()
     })
+    // works exactly like beforeEach
+    // beforeAll( () => {
+    // })
+    // after each test
+    // afterEach( () => {
+    // })
+    //after finishing all tests
+    // afterAll( () => {
+    // })
 
     it('should create', () => {
         expect(component).toBeTruthy()
