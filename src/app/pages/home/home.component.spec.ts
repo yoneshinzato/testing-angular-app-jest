@@ -5,7 +5,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, Pipe, PipeTransform } from "@
 import { BookService } from "../../services/book.service";
 import { of } from "rxjs";
 import { Book } from "src/app/models/book.model";
-import { fn } from "@angular/compiler/src/output/output_ast";
 
 const listBook: Book[] = [
     {
