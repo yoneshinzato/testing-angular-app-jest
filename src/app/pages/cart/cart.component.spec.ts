@@ -1,5 +1,5 @@
 import { CartComponent } from "./cart.component"
-import { ComponentFixture, TestBed, } from "@angular/core/testing"
+import { ComponentFixture, TestBed, inject } from "@angular/core/testing"
 import { HttpClientTestingModule } from "@angular/common/http/testing"
 import { BookService } from "../../services/book.service";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/compiler";
@@ -47,6 +47,7 @@ describe('Cart component', () => {
             ],
             providers: [
                 BookService,
+                // CartComponent
             ],
             schemas: [
                 CUSTOM_ELEMENTS_SCHEMA,
@@ -77,6 +78,10 @@ describe('Cart component', () => {
         expect(component).toBeTruthy();
     })
 
+    // alternate form to test. include CartComponent in provider
+    // it('should create', inject([CartComponent], (component2: CartComponent) => {
+    //     expect(component2).toBeTruthy()
+    // }))
 
     it('getTotalPrice returns an amount', () => {
        const totalPrice = component.getTotalPrice(listBook)

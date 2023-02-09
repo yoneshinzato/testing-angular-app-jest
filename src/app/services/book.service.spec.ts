@@ -1,10 +1,11 @@
 import { BookService } from "./book.service"
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing"
 import { TestBed } from "@angular/core/testing"
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core"
+import { CUSTOM_ELEMENTS_SCHEMA, inject, NO_ERRORS_SCHEMA } from "@angular/core"
 import { Book } from "../models/book.model"
 import { environment } from '../../environments/environment.prod';
 import Swal from "sweetalert2"
+import { CartComponent } from "../pages/cart/cart.component"
 
 const listBook: Book[] = [
     {
@@ -44,7 +45,7 @@ describe('BookService', () => {
 
     beforeEach( () => {
         service = TestBed.inject(BookService)
-        // service = TestBed.get(BookService) - versão 9 pra baixo
+        // service = TestBed.get(BookService) - versão 9 pra cima
         httpMock = TestBed.inject(HttpTestingController)
     })
 
@@ -60,6 +61,8 @@ describe('BookService', () => {
     it('should create', () => {
         expect(service).toBeTruthy()
     })
+
+
 
     it('getBooks return a list of books and does a get method', () => {
         service.getBooks().subscribe((res: Book[]) => {
