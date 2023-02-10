@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FormComponent implements OnInit {
 
   public form: FormGroup;
+  clicked = false
 
   constructor(
     private readonly fb: FormBuilder,
@@ -20,6 +21,7 @@ export class FormComponent implements OnInit {
 
   public onSave(): void {
     console.log('Saved')
+    this.clicked = true
   }
 
   private instanceForm(): FormGroup {

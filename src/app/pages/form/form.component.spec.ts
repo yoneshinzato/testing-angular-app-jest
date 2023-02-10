@@ -2,10 +2,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/compiler';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './form.component';
+import { By } from "@angular/platform-browser";
+
 
 describe('FormComponent', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
+  let button
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -21,6 +24,7 @@ describe('FormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FormComponent)
     component = fixture.componentInstance
+    button = fixture.debugElement.query(By.css('button'))
     fixture.detectChanges()
   })
 
@@ -65,6 +69,12 @@ describe('FormComponent', () => {
     nameField.setValue('Yone')
     emailField.setValue('yone@gmail.com')
     expect(component.form.valid).toBe(true)
+  })
+
+  it('should change clicked property when button is clicked', () => {
+    button.triggerEventHandler('click')
+    fixture.detectChanges()
+    expect(component.clicked).toBe(true)
   })
 
 
