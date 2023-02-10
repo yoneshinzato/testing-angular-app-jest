@@ -33,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     PagesComponent,
+    FormComponent
   ]
 })
 export class PagesModule { }
