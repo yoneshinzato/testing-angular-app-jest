@@ -3,8 +3,9 @@ import { ComponentFixture, TestBed, inject } from "@angular/core/testing"
 import { HttpClientTestingModule } from "@angular/common/http/testing"
 import { BookService } from "../../services/book.service";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/compiler";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { DebugElement, NO_ERRORS_SCHEMA } from "@angular/core";
 import { Book } from '../../models/book.model';
+import { By } from "@angular/platform-browser";
 
 
 const listBook: Book[] = [
@@ -151,6 +152,25 @@ describe('Cart component', () => {
         component['_clearListCartBook']()
         expect(component.listCartBook.length).toBe(0)
         expect(spy1).toHaveBeenCalledTimes(1)
+    })
+
+    it('The tile "The cart is empty" is not showed when there is a list', () => {
+        component.listCartBook = listBook
+        //update list
+        fixture.detectChanges()
+        const debugElement: DebugElement = fixture.debugElement.query(By.css('#titleCartEmpty'))
+        expect(debugElement).toBeFalsy()
+    })
+
+    it('The title "The cart is empty" is displayed correctly when the list is empty', () => {
+        component.listCartBook = []
+        fixture.detectChanges()
+        const debugElement: DebugElement = fixture.debugElement.query(By.css('#titleCartEmpty'))
+        expect(debugElement).toBeTruthy()
+        if(debugElement){
+            const element: HTMLElement = debugElement.nativeElement
+            expect(element.innerHTML).toContain("The cart is empty");
+        }
     })
 
 })
